@@ -1,34 +1,51 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Stay Awake</title>
+  <title>NoSleep Toggle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    #toggle {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      filter: invert(1);
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800 flex items-center justify-center h-screen">
-  <div class="text-center">
-    <img src="https://files.svgcdn.io/uiw/coffee.svg" alt="Coffee Icon" class="mx-auto mb-4 w-12 h-12">
-    <label class="inline-flex items-center cursor-pointer">
-      <input type="checkbox" id="toggle" class="sr-only peer">
-      <div class="w-6 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 transition-all"></div>
-      <span class="ml-3 text-sm font-medium">Stay Awake</span>
-    </label>
-    <video id="stayAwakeVideo" class="hidden" loop muted playsinline>
-      <source src="data:video/mp4;base64,AAAAHGZ0eXBtcDQyAAAAAG1wNDFtcDQyaXNvbWF2YzEAAAAIZnJlZQAAACBtZGF0AAAAAA==" type="video/mp4">
-    </video>
-  </div>
+<body>
+  <img
+    id="toggle"
+    src="https://cdn.jsdelivr.net/npm/@mdi/svg/svg/coffee-off-outline.svg"
+    alt="Toggle Coffee Icon"
+  />
 
   <script>
-    const toggle = document.getElementById('toggle');
-    const video = document.getElementById('stayAwakeVideo');
+    const noSleep = new NoSleep();
+    let wakeLockEnabled = false;
+    const toggleIcon = document.getElementById('toggle');
 
-    toggle.addEventListener('change', function () {
-      if (this.checked) {
-        video.play();
+    toggleIcon.addEventListener('click', () => {
+      if (!wakeLockEnabled) {
+        noSleep.enable();
+        toggleIcon.src = "https://cdn.jsdelivr.net/npm/@mdi/svg/svg/coffee-outline.svg";
+        wakeLockEnabled = true;
       } else {
-        video.pause();
+        noSleep.disable();
+        toggleIcon.src = "https://cdn.jsdelivr.net/npm/@mdi/svg/svg/coffee-off-outline.svg";
+        wakeLockEnabled = false;
       }
     });
   </script>
