@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stay Awake</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800 flex items-center justify-center h-screen">
+  <div class="text-center">
+    <img src="https://files.svgcdn.io/uiw/coffee.svg" alt="Coffee Icon" class="mx-auto mb-4 w-12 h-12">
+    <label class="inline-flex items-center cursor-pointer">
+      <input type="checkbox" id="toggle" class="sr-only peer">
+      <div class="w-6 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:bg-green-500 transition-all"></div>
+      <span class="ml-3 text-sm font-medium">Stay Awake</span>
+    </label>
+    <video id="stayAwakeVideo" class="hidden" loop muted playsinline>
+      <source src="data:video/mp4;base64,AAAAHGZ0eXBtcDQyAAAAAG1wNDFtcDQyaXNvbWF2YzEAAAAIZnJlZQAAACBtZGF0AAAAAA==" type="video/mp4">
+    </video>
+  </div>
+
+  <script>
+    const toggle = document.getElementById('toggle');
+    const video = document.getElementById('stayAwakeVideo');
+
+    toggle.addEventListener('change', function () {
+      if (this.checked) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  </script>
+</body>
+</html>
